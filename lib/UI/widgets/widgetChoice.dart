@@ -14,13 +14,13 @@ Widget decideImageView() {
 
 Widget decideDoorView() {
   if (door == 2) {
-    return const Text("Door 2", style: TextStyle(fontSize: 21));
+    return const Text("Doors           2", style: TextStyle(fontSize: 21));
   } else if (door == 3) {
-    return const Text("Door 3", style: TextStyle(fontSize: 21));
-  } else if (door == 3) {
-    return const Text("Door 4", style: TextStyle(fontSize: 21));
+    return const Text("Doors           3", style: TextStyle(fontSize: 21));
+  } else if (door == 4) {
+    return const Text("Doors           4", style: TextStyle(fontSize: 21));
   } else {
-    return const Text("Door", style: TextStyle(fontSize: 21));
+    return const Text("Doors", style: TextStyle(fontSize: 21));
   }
 }
 //Widget decideDoorView() {}

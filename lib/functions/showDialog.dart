@@ -1,10 +1,12 @@
 // ignore_for_file: file_names, prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:settings/cubit/settings_cubit.dart';
 import 'package:settings/functions/functions.dart';
 
-Future<void> showChoiceDialog(BuildContext context) {
-  return showDialog(
+SettingsCubit settingsCubit = SettingsCubit();
+showChoiceDialog(BuildContext context) async {
+  var image = await showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -32,8 +34,8 @@ Future<void> showChoiceDialog(BuildContext context) {
       });
 }
 
-Future<void> showDoorDialog(BuildContext context) {
-  return showDialog(
+showDoorDialog(BuildContext context) async {
+  return await showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -67,8 +69,8 @@ Future<void> showDoorDialog(BuildContext context) {
       });
 }
 
-Future<void> showColorDialog(BuildContext context) {
-  return showDialog(
+showColorDialog(BuildContext context) async {
+  return await showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -95,7 +97,7 @@ Future<void> showColorDialog(BuildContext context) {
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
                         const Text("Red"),
-                        const SizedBox(width: 185),
+                        const SizedBox(width: 187),
                         const Icon(
                           FontAwesomeIcons.car,
                           color: Colors.red,
@@ -109,7 +111,7 @@ Future<void> showColorDialog(BuildContext context) {
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
                         const Text("Green"),
-                        const SizedBox(width: 175),
+                        const SizedBox(width: 178),
                         const Icon(
                           FontAwesomeIcons.car,
                           color: Colors.green,
@@ -123,7 +125,7 @@ Future<void> showColorDialog(BuildContext context) {
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
                         const Text("Yellow"),
-                        const SizedBox(width: 170),
+                        const SizedBox(width: 172),
                         const Icon(
                           FontAwesomeIcons.car,
                           color: Colors.yellow,
@@ -249,8 +251,8 @@ Future<void> showColorDialog(BuildContext context) {
       });
 }
 
-Future<void> showTypeDialog(BuildContext context) {
-  return showDialog(
+showTypeDialog(BuildContext context) async {
+  return await showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -294,8 +296,8 @@ Future<void> showTypeDialog(BuildContext context) {
       });
 }
 
-Future<void> showCapacityDialog(BuildContext context) {
-  return showDialog(
+showCapacityDialog(BuildContext context) async {
+  return await showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -348,8 +350,8 @@ Future<void> showCapacityDialog(BuildContext context) {
       });
 }
 
-Future<void> showModeDialog(BuildContext context) {
-  return showDialog(
+showModeDialog(BuildContext context) async {
+  return await showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -373,8 +375,42 @@ Future<void> showModeDialog(BuildContext context) {
       });
 }
 
-Future<void> showVehMakeDialog(BuildContext context) {
-  return showDialog(
+showVehMakeDialog(BuildContext context) async {
+  return await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                TextFormField(
+                  controller: settingsCubit.controllerVehicleMake,
+                ),
+                const Padding(padding: EdgeInsets.all(8.0)),
+                Row(
+                  children: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pop(
+                              context, settingsCubit.controllerVehicleMake);
+                        },
+                        child: const Text("Cancel")),
+                    SizedBox(width: 100),
+                    TextButton(
+                        // style: ButtonStyle(backgroundColor: ),
+                        onPressed: () {},
+                        child: Text("Save")),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      });
+}
+
+showVehModelDialog(BuildContext context) async {
+  return await showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -404,40 +440,9 @@ Future<void> showVehMakeDialog(BuildContext context) {
       });
 }
 
-Future<void> showVehModelDialog(BuildContext context) {
-  return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: [
-                const TextField(),
-                const Padding(padding: EdgeInsets.all(8.0)),
-                Row(
-                  children: [
-                    TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text("Cancel")),
-                    SizedBox(width: 100),
-                    TextButton(
-                        // style: ButtonStyle(backgroundColor: ),
-                        onPressed: () {},
-                        child: Text("Save")),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
-      });
-}
-
-Future<void> showVehPlateNumDialog(BuildContext context) {
+showVehPlateNumDialog(BuildContext context) async {
   BuildContext ccontext;
-  return showDialog(
+  return await showDialog(
       context: context,
       builder: (BuildContext context) {
         ccontext = context;
@@ -468,7 +473,7 @@ Future<void> showVehPlateNumDialog(BuildContext context) {
       });
 }
 
-Future<void> showMFYDialog(BuildContext context) async {
+showMFYDialog(BuildContext context) async {
   return await showDialog(
       context: context,
       builder: (BuildContext context) {

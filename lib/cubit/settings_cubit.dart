@@ -46,7 +46,7 @@ class SettingsCubit extends Cubit<SettingsState> {
           private: controllerPrivate.text);
 
       var res = await settingsApi.sendDriverProf(settings);
-      print("CreatePostRes: $res");
+      //print("CreatePostRes: $res");
       emit(MessageState('Post Created Succesfully'));
     } on Exception catch (error) {
       emit(ErrorState(error));
