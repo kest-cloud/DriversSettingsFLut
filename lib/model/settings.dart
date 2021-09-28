@@ -3,7 +3,7 @@ class Settings {
   String doors;
   String color;
   String type;
-  String capacity;
+  String capacity ;
   String private;
   String vehicleMake;
   String vehicleModel;

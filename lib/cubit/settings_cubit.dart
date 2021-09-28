@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
+import 'package:settings/functions/functions.dart';
 import 'package:settings/model/settings.dart';
 import 'package:settings/network/settingsApi.dart';
 
@@ -8,7 +10,7 @@ part 'settings_state.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
   SettingsCubit() : super(SettingsInitial());
-
+  SettingsApi settingsApi = SettingsApi();
   List<Settings> settings = [];
 
   TextEditingController controllerImage = TextEditingController();
@@ -25,13 +27,12 @@ class SettingsCubit extends Cubit<SettingsState> {
   createPost() async {
     emit(MessageState('Creating Post..'));
 
-    print("PostBody: ${controllerImage.value}");
-    print("postTitle: ${controllerDoor.value}");
-    print("postUserId: ${controllerType.value}");
-    print("postId:       ${controllerColor.value}");
+    // print("PostBody: ${controllerImage.value}");
+    // print("postTitle: ${controllerDoor.value}");
+    // print("postUserId: ${controllerType.value}");
+    // print("postId:       ${controllerColor.value}");
 
     try {
-      SettingsApi settingsApi = SettingsApi();
       Settings settings = Settings(
           image: controllerImage.text,
           type: controllerType.text,
@@ -73,5 +74,32 @@ class SettingsCubit extends Cubit<SettingsState> {
     emit(VehicleModelState(controllerVehicleModel.text));
     emit(VehiclePlateNumState(controllerVehiclePlate.text));
     emit(TypeState(controllerType.text));
+  }
+
+  dynamic picture;
+
+  openCamera(BuildContext context) async {
+    var picture = await ImagePicker.pickImage(
+        source: ImageSource.camera,
+        maxHeight: 145,
+        maxWidth: 153,
+        imageQuality: 23,
+        preferredCameraDevice: CameraDevice.rear);
+    emit(ImageState(controllerImage.text));
+    imageFile = picture;
+    Navigator.of(context).pop();
+  }
+
+  openGallery(BuildContext context) async {
+    var picture = await ImagePicker.pickImage(
+        source: ImageSource.gallery,
+        maxHeight: 145,
+        maxWidth: 160,
+        imageQuality: 23,
+        preferredCameraDevice: CameraDevice.rear);
+    emit(ImageState(controllerImage.text));
+    print(controllerImage);
+    imageFile = picture;
+    Navigator.of(context).pop();
   }
 }
